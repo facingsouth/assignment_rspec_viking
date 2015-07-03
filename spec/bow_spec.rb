@@ -39,10 +39,19 @@ describe Bow do
 
     it 'should reduce the number of arrows by 1' do
 
+      bow.use
 
+      expect(bow.arrows).to eq(9)
 
     end
 
+    it "should raise error if out of arrows" do
+
+      allow(bow).to receive(:out_of_arrows?).and_return(true)
+
+      expect { bow.use }.to raise_error()
+
+    end
 
   end
 
