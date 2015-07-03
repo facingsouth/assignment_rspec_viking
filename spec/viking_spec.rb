@@ -104,6 +104,46 @@ describe Viking do
       viking.attack(target)
     end
 
+    it "should attack with fist if no weapon" do
+
+      allow(viking).to receive(:damage_with_fists).and_return(10)
+      expect(viking).to receive(:damage_with_fists)
+      viking.attack(target)
+
+    end
+
+    it "should deal correct amount of damage with no weapon" do
+      
+      viking.attack(target)
+      expect(target.health).to eql(97.5)
+      
+    end
+
+    it "should attack with a weapon if has a weapon" do
+
+      viking.pick_up_weapon(sword)
+      allow(viking).to receive(:damage_with_weapon).and_return(10)
+      expect(viking).to receive(:damage_with_weapon)
+      viking.attack(target)
+
+    end
+
+    it "should deal correct amount of damage with a weapon" do
+      
+      viking.pick_up_weapon(sword)
+      viking.attack(target)
+      expect(target.health).to eql(90)
+      
+    end
+
+    it "should attack with fists if out of arrows" do
+
+      bow = Bow.new
+      allow(bow).to receive(:arrows).and_return(0)
+      viking.pick_up_weapon(bow)
+      viking.attack(target)
+      
+    end
 
   end
 
