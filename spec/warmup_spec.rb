@@ -33,9 +33,19 @@ describe Warmup do
 
     it "should call upcase method" do
 
-      allow(string).to receive(:upcase).and_return("STRING")
+      # allow(string).to receive(:upcase!).and_return("STRING")
 
-      expect(string).to receive(:upcase)
+      expect(string).to receive(:upcase!)
+
+      warmup.calls_some_methods(string)
+
+    end
+
+    it "should call reverse method" do
+
+      # allow(string).to receive(:reverse!).and_return("STRING")
+
+      expect(string).to receive(:reverse!)
 
       warmup.calls_some_methods(string)
 
